@@ -15,7 +15,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <url>www.mk7a.com</url>
+    <url>https://www.mk7a.com</url>
 
     <build>
         <defaultGoal>clean package</defaultGoal>
