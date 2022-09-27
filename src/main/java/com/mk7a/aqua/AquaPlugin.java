@@ -7,8 +7,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class AquaPlugin extends JavaPlugin {
 
-    protected static final String P_NOTIFY = "aqua.notify";
-    protected static final String P_BYPASS = "aqua.bypass";
+    static final String P_NOTIFY = "aqua.notify";
+    static final String P_BYPASS = "aqua.bypass";
 
     private static final double CONFIG_VER = 1.1;
     private static final String VERSION_PATH = "configVersionDoNotModify";
@@ -48,7 +48,7 @@ public final class AquaPlugin extends JavaPlugin {
 
     }
 
-    protected void reloadMessages() {
+    private void reloadMessages() {
 
         prefix = t(getConfig().getString("messages.messagePrefix"));
         afkForPlayer = t(getConfig().getString("messages.afkForPlayer"));

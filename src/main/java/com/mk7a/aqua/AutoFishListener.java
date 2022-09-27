@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +18,7 @@ import java.util.UUID;
 public class AutoFishListener implements Listener {
 
     private final AquaPlugin plugin;
-    private final HashMap<UUID, List<fishAttempt>> fishEvents = new HashMap<>();
+    private final HashMap<UUID, List<FishAttempt>> fishEvents = new HashMap<>();
 
     AutoFishListener(AquaPlugin plugin) {
         this.plugin = plugin;
@@ -28,7 +29,7 @@ public class AutoFishListener implements Listener {
     }
 
     @EventHandler
-    public void onFish(PlayerFishEvent event) {
+    public void onFish(@NotNull PlayerFishEvent event) {
 
         Player player = event.getPlayer();
 
@@ -42,7 +43,7 @@ public class AutoFishListener implements Listener {
         Block hookBlock = hook.getLocation().getBlock();
         Long timestamp = System.currentTimeMillis();
 
-        List<fishAttempt> playerFishAttempts = fishEvents.getOrDefault(uuid, new ArrayList<>());
+        List<FishAttempt> playerFishAttempts = fishEvents.getOrDefault(uuid, new ArrayList<>());
 
         if (!hookBlock.getType().equals(Material.WATER)) {
             return;
@@ -89,11 +90,11 @@ public class AutoFishListener implements Listener {
             }
 
 
-            fishAttempt attempt = new fishAttempt(timestamp, playerLocation, true, false);
+            FishAttempt attempt = new FishAttempt(timestamp, playerLocation, true, false);
             playerFishAttempts.add(attempt);
 
         } else if (event.getState().equals(PlayerFishEvent.State.FAILED_ATTEMPT)) {
-            fishAttempt attempt = new fishAttempt(timestamp, playerLocation, false, false);
+            FishAttempt attempt = new FishAttempt(timestamp, playerLocation, false, false);
             playerFishAttempts.add(attempt);
         }
 
@@ -101,7 +102,7 @@ public class AutoFishListener implements Listener {
         fishEvents.put(uuid, playerFishAttempts);
     }
 
-    private int getConsecutiveSuccess(List<fishAttempt> fishAttempts) {
+    private int getConsecutiveSuccess(@NotNull List<FishAttempt> fishAttempts) {
 
         int count = 0;
         for (int i = fishAttempts.size() - 1; i >= 0; i--) {
@@ -114,14 +115,14 @@ public class AutoFishListener implements Listener {
         return count;
     }
 
-    private class fishAttempt {
+    private class FishAttempt {
 
         final Long timestamp;
         final Location playerLocation;
         final boolean success;
         final boolean cancelled;
 
-        fishAttempt(Long timestamp, Location playerLocation, boolean success, boolean cancelled) {
+        FishAttempt(Long timestamp, Location playerLocation, boolean success, boolean cancelled) {
             this.timestamp = timestamp;
             this.playerLocation = playerLocation;
             this.success = success;

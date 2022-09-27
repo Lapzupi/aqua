@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
@@ -25,7 +26,7 @@ public class AfkFishListener implements Listener {
     }
 
     @EventHandler
-    public void onFish(PlayerFishEvent event) {
+    public void onFish(@NotNull PlayerFishEvent event) {
 
         Player player = event.getPlayer();
 
