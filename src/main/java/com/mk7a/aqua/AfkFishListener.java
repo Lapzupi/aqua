@@ -35,26 +35,26 @@ public class AfkFishListener implements Listener {
 
         FishHook hook = event.getHook();
         Block hookBlock = hook.getLocation().getBlock();
-
-        if (event.getState().equals(PlayerFishEvent.State.BITE)) {
-
-            if (!Arrays.asList(allowedMediums).contains(hookBlock.getType())
-                    || hookBlock.getRelative(BlockFace.UP).getType().equals(Material.TRIPWIRE)) {
-
-                hook.remove();
-                event.setCancelled(true);
-
-                player.sendTitle("", plugin.afkForPlayer, 1, 100, 1);
-                player.playSound(player.getLocation(), Sound.BLOCK_CONDUIT_DEACTIVATE, 1F, 1F);
-
-                Location playerLocation = player.getLocation();
-                playerLocation.setPitch(0F);
-                player.teleport(playerLocation);
-
-                Bukkit.broadcast(plugin.prefix + plugin.afkForAdmin.replaceAll("%p%", player.getName())
-                        .replaceAll("%u%", player.getUniqueId().toString()), AquaPlugin.P_NOTIFY);
-
-            }
+        if (!event.getState().equals(PlayerFishEvent.State.BITE)) {
+            return;
         }
+
+        if (!Arrays.asList(allowedMediums).contains(hookBlock.getType()) || hookBlock.getRelative(BlockFace.UP).getType().equals(Material.TRIPWIRE)) {
+
+            hook.remove();
+            event.setCancelled(true);
+
+            player.sendTitle("", plugin.afkForPlayer, 1, 100, 1);
+            player.playSound(player.getLocation(), Sound.BLOCK_CONDUIT_DEACTIVATE, 1F, 1F);
+
+            Location playerLocation = player.getLocation();
+            playerLocation.setPitch(0F);
+            player.teleport(playerLocation);
+
+            Bukkit.broadcast(plugin.prefix + plugin.afkForAdmin.replaceAll("%p%", player.getName())
+                    .replaceAll("%u%", player.getUniqueId().toString()), AquaPlugin.P_NOTIFY);
+
+        }
+
     }
 }
