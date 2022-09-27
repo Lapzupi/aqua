@@ -12,9 +12,15 @@
     <name>Aqua</name>
 
     <description>Fishing anticheat</description>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <maven.compiler.version>3.10.1</maven.compiler.version>
+        <maven.jar.version>3.2.0</maven.jar.version>
+        <spigot.api.version>1.13.2-R0.1-SNAPSHOT</spigot.api.version>
     </properties>
+
     <url>https://www.mk7a.com</url>
 
     <build>
@@ -23,15 +29,15 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
+                <version>${maven.jar.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>${maven.compiler.version}</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -58,7 +64,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.13.2-R0.1-SNAPSHOT</version>
+            <version>${spigot.api.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
