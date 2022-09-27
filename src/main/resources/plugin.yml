@@ -4,7 +4,7 @@ main: com.mk7a.aqua.AquaPlugin
 api-version: 1.13
 prefix: Aqua
 authors: [mk7a]
-description: Fishing anticheat
+description: ${project.description}
 website: https://www.spigotmc.org/resources/aqua-anti-afk-auto-fishing.66618/
 permissions:
   aqua.bypass:
