@@ -30,7 +30,6 @@ public class AutoFishListener implements Listener {
 
     @EventHandler
     public void onFish(@NotNull PlayerFishEvent event) {
-
         Player player = event.getPlayer();
 
         if (player.hasPermission(AquaPlugin.P_BYPASS)) {
@@ -38,10 +37,8 @@ public class AutoFishListener implements Listener {
         }
 
         UUID uuid = player.getUniqueId();
-        Location playerLocation = player.getLocation();
         FishHook hook = event.getHook();
         Block hookBlock = hook.getLocation().getBlock();
-        Long timestamp = System.currentTimeMillis();
 
         List<FishAttempt> playerFishAttempts = fishEvents.getOrDefault(uuid, new ArrayList<>());
 
@@ -49,6 +46,8 @@ public class AutoFishListener implements Listener {
             return;
         }
 
+        Long timestamp = System.currentTimeMillis();
+        Location playerLocation = player.getLocation();
         if (event.getState().equals(PlayerFishEvent.State.CAUGHT_FISH)) {
 
             int consecutiveSuccess = getConsecutiveSuccess(playerFishAttempts);
@@ -115,7 +114,7 @@ public class AutoFishListener implements Listener {
         return count;
     }
 
-    private class FishAttempt {
+    private static class FishAttempt {
 
         final Long timestamp;
         final Location playerLocation;

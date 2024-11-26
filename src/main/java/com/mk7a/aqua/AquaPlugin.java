@@ -50,14 +50,14 @@ public final class AquaPlugin extends JavaPlugin {
 
     private void reloadMessages() {
 
-        prefix = t(getConfig().getString("messages.messagePrefix"));
-        afkForPlayer = t(getConfig().getString("messages.afkForPlayer"));
-        afkForAdmin = t(getConfig().getString("messages.afkForAdmin"));
-        autoForPlayer = t(getConfig().getString("messages.autoForPlayer"));
-        autoForAdmin = t(getConfig().getString("messages.autoForAdmin"));
+        prefix = color(getConfig().getString("messages.messagePrefix"));
+        afkForPlayer = color(getConfig().getString("messages.afkForPlayer"));
+        afkForAdmin = color(getConfig().getString("messages.afkForAdmin"));
+        autoForPlayer = color(getConfig().getString("messages.autoForPlayer"));
+        autoForAdmin = color(getConfig().getString("messages.autoForAdmin"));
     }
 
-    private static String t(String input) {
+    private static String color(String input) {
         return ChatColor.translateAlternateColorCodes('&', input);
     }
 }
